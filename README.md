@@ -1,4 +1,4 @@
-# 🤖 GitHub Smart Follow Manager
+# 🤖 GitHub Smart Follow/Unfollow Manager
 
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
 [![GitHub API](https://img.shields.io/badge/GitHub-API-green.svg)](https://docs.github.com/en/rest)
