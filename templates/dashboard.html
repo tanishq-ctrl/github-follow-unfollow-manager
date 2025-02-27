@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GitHub Automation Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1e1e2f;
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .btn {
+            border-radius: 25px;
+        }
+        a.btn-secondary {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <h1 class="mb-4 text-center">GitHub Automation Dashboard</h1>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+      
+      <div class="card p-4">
+        <h4 class="card-title">Follow Users</h4>
+        <form method="post" action="{{ url_for('follow') }}">
+            <div class="form-group mb-3">
+                <label for="max_users">Maximum Users to Follow:</label>
+                <input type="number" class="form-control" id="max_users" name="max_users" value="50" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Start Following</button>
+        </form>
+      </div>
+      
+      <div class="card p-4">
+        <h4 class="card-title">Unfollow Non-Followers</h4>
+        <form method="post" action="{{ url_for('unfollow') }}">
+            <button type="submit" class="btn btn-danger w-100">Unfollow Non-Followers</button>
+        </form>
+      </div>
+      
+      <div class="text-center">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Change Token</a>
+      </div>
+    </div>
+    <!-- Bootstrap 5 JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

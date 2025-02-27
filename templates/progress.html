@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Task Progress</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #1e1e2f;
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .progress-log {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">{{ task_type }} Progress</h2>
+        <div class="progress-log" id="progress-log"></div>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Return to Dashboard</a>
+        </div>
+    </div>
+    <!-- jQuery for polling -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function fetchProgress() {
+            $.getJSON("{{ url_for('progress') }}", function(data) {
+                var log = data.join("\n");
+                $("#progress-log").text(log);
+            });
+        }
+        // Poll every second
+        setInterval(fetchProgress, 1000);
+        fetchProgress();
+    </script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
